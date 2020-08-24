@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  django:
+    build:
+      context: .
+    container_name: "todo-backend"
+    ports:
+      - "8000:8000"
+    volumes:
+      - todo_django_data:/var/app/artistas-todo-backend
+  mariadb:
+
+volumes:
+  django_data:
