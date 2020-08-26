@@ -1,33 +1,26 @@
 version: "3.8"
 
 services:
-  django:
-    build:
-      context: .
-    container_name: "todo-backend_django"
-    networks:
-      - backend
+  web:
+    build: .
+    command: ["python", "manage.py", "runserver", "0:8000"]
+    container_name: "todo-web"
+    depends_on:
+      - db
     ports:
       - "8000:8000"
     volumes:
-      - todo_django_data:/var/app/artistas-todo-backend
-  mariadb:
-    container_name: "todo-backend_mariadb"
-    image: mariadb
+      - .:/code/
+  db:
+    container_name: "todo-db"
+    image: mariadb:10.3
     environment:
       MYSQL_ROOT_PASSWORD: "toor"
       MYSQL_DATABASE: "todo"
-    networks:
-      - backend
     ports:
       - "3306:3306"
     volumes:
       - todo-backend_mariadb:/var/lib/mysql
       
-
-networks:
-  backend:
-
 volumes:
-  todo_django_data:
   todo-backend_mariadb:
