@@ -76,11 +76,8 @@ WSGI_APPLICATION = 'artistas_todo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todo',
-        'USER': 'root',
-        'PASSWORD': 'toor',
-        'HOST': 'db',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 

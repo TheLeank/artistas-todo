@@ -5,22 +5,7 @@ services:
     build: .
     command: ["python", "manage.py", "runserver", "0:8000"]
     container_name: "todo-web"
-    depends_on:
-      - db
     ports:
       - "8000:8000"
     volumes:
       - .:/code/
-  db:
-    container_name: "todo-db"
-    image: mariadb:10.3
-    environment:
-      MYSQL_ROOT_PASSWORD: "toor"
-      MYSQL_DATABASE: "todo"
-    ports:
-      - "3306:3306"
-    volumes:
-      - todo-backend_mariadb:/var/lib/mysql
-      
-volumes:
-  todo-backend_mariadb:
