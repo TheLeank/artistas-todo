@@ -10,15 +10,14 @@ def create(request):
     """
     Creates new Task()
     """
-    # Create
     if request.method == 'POST':
         task = Task()
         task.text = request.POST.get('text', 'null')
         task.status = request.POST.get('status', False)
         task.save()
-        return JsonResponse({'task_id':task.id, 'text':task.text, 'status':task.status})
+        return HttpResponse(status=201)
     else:
-        return JsonResponse("Invalid request", safe=False)
+        return HttpResponse(status=400)
 
 
 @csrf_exempt
@@ -30,7 +29,7 @@ def handle(request, task_id):
     if request.method == 'GET':
         task = Task.objects.get(id=task_id)
         output = {
-            'task_id':task.id,
+            'id':task.id,
             'text':task.text,
             'status':task.status
         }   
@@ -44,7 +43,7 @@ def handle(request, task_id):
         task.status = put_dict['status']
         task.save()
         output = {
-            'task_id':task.id,
+            'id':task.id,
             'text':task.text,
             'status':task.status
         }
@@ -54,9 +53,10 @@ def handle(request, task_id):
     elif request.method == 'DELETE':
         task = Task.objects.get(id=task_id)
         task.delete()
-        return JsonResponse('Task deleted', safe=False)
+        return HttpResponse(status=204)
     else:
-        return JsonResponse('Invalid request')
+        return HttpResponse(status=400)
+
 
         
 @csrf_exempt
@@ -69,5 +69,4 @@ def tasks(request):
     for task in tasks:
         entry = {'text':task.text, 'status':task.status}
         task_list[task.id] = entry
-
     return JsonResponse(task_list)
