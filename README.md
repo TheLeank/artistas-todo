@@ -14,21 +14,6 @@ Docker and docker-compose.
 
 The project is ready to use. Clone it and execute `./manage.py migrate`.
 
-## Requests
+## API documentation
 
-Get all tasks (GET):
-http://localhost:8001/backend/tasks/
-
-Get task (GET):
-http://localhost:8001/backend/task/{id}/
-
-Create task (POST):
-http://localhost:8001/backend/task/
-Params: text, body
-
-Update task (PUT):
-http://localhost:8001/backend/task/{id}/
-Params: text, body
-
-Delete task (DEL):
-http://localhost:8001/backend/task/{id}/
+Start the project then navigate to http://localhost:8001/

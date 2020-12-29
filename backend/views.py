@@ -1,9 +1,12 @@
 from django.core.serializers import serialize
 from django.http import HttpResponse, JsonResponse, QueryDict
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Task
 
+def index(request):
+    return render(request, 'backend/index.html')
 
 @csrf_exempt
 def create(request):
